@@ -5,6 +5,7 @@ import com.tju.elmboot.po.User;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 @Mapper
 public interface UserMapper {
@@ -17,4 +18,7 @@ public interface UserMapper {
 
     @Insert("insert into user values(#{userId},#{password},#{userName},#{userSex},null,1)")
     public int saveUser(User user);
+
+    @Update("update user set password=#{password}, userName=#{userName}, userSex=#{userSex}, userImg=#{userImg} where userId=#{userId}")
+    public int updateUser(User user);
 }
