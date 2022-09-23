@@ -14,4 +14,6 @@ public interface FoodMapper {
 
     @Select("select * from food where foodId=#{foodId}")
     public Food getFoodById(Integer foodId);
+
+
 }
