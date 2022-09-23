@@ -10,6 +10,9 @@
         <module name="elmboot" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ELM_Project_Final" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
