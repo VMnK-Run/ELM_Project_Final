@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tju.elmboot.mapper.CommentMapper">
+
+    <resultMap id="commentResultMap" type="com.tju.elmboot.po.Comment">
+        <result column="userId" property="userId"/>
+        <result column="businessId" property="businessId"/>
+        <result column="foodId" property="foodId"/>
+        <result column="content" property="content"/>
+        <result column="img" property="img"/>
+        <result column="star" property="star"/>
+    </resultMap>
+
+    <select id="listComment" parameterType="com.tju.elmboot.po.Comment" resultMap="commentResultMap">
+        select * from comment
+        <where>
+            1=1
+            <if test="businessId!=null and businessId!='' ">
+                and businessId=#{businessId}
+            </if>
+            <if test="userId!=null and userId!='' ">
+                and userId=#{userId}
+            </if>
+            <if test="foodId!=null and foodId!='' ">
+                and foodId=#{foodId}
+            </if>
+        </where>
+    </select>
+
+
+    <update id="updateComment" parameterType="com.tju.elmboot.po.Comment">
+        update comment
+        <set>
+            cmId=#{cmId},
+            <if test="content!=null and content!='' ">
+            content=#{content},
+            </if>
+            <if test="img!=null and img!='' ">
+            img=#{img},
+            </if>
+            <if test="star!=null and star!='' ">
+            star=#{star}
+            </if>
+        </set>
+        where cmId=#{cmId}
+    </update>
+
+</mapper>

@@ -14,4 +14,7 @@ public interface FoodMapper {
 
     @Select("select * from food where foodId=#{foodId}")
     public Food getFoodById(Integer foodId);
+
+    @Select("select * from food order by foodId")
+    public List<Food> listAllFood();
 }

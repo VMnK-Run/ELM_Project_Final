@@ -20,4 +20,14 @@ public class FoodController {
     public List<Food> listFoodByBusinessId(Food food) throws Exception {
         return foodService.listFoodByBusinessId(food.getBusinessId());
     }
+
+    @RequestMapping("/getFoodByRandom")
+    public Food getFoodByRandom() throws Exception {
+        return foodService.getFoodByRandom();
+    }
+
+    @RequestMapping("/listFoodByTime")
+    public List<Food> listFoodByTime() throws Exception {
+        return foodService.listFoodByTime();
+    }
 }

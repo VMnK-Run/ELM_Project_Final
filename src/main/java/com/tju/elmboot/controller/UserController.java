@@ -27,4 +27,9 @@ public class UserController {
     public int saveUser(User user) throws Exception {
         return userService.saveUser(user);
     }
+
+    @RequestMapping("/updateUser")
+    public int updateUser(User user) throws Exception {
+        return userService.updateUser(user);
+    }
 }
