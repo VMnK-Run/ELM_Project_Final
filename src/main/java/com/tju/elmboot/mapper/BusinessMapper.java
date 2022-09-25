@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface BusinessMapper {
@@ -14,4 +15,18 @@ public interface BusinessMapper {
 
     @Select("select * from business where businessId=#{businessId}")
     public Business getBusinessById(Integer businessId);
+
+    @Select("select * from business order by businessId")
+    public List<Business> listBusinessDefault();
+
+    public List<Business> listBusinessByDistance(Map<String, String> map);
+
+    @Select("select * from business t1  left join (select b.businessId,COUNT(o.businessId) as count from orders o right join business b on o.businessId=b.businessId group by b.businessId order by count desc) t0 on t1.businessId=t0.businessId order by t0.count desc")
+    public List<Business>listBusinessBySales();
+
+    public List<Business>listBusinessByConditions(Integer orderTypeId,Double starPrice,Double deliveryPrice,Double distance,Double deliveryTime,Double longitude,Double latitude);
+
+    @Select("select * from business b where b.businessName like concat('%',#{0},'%') union all select * from business b where b.businessId = (select group_concat(businessId) from food f where f.foodName like concat('%',#{0},'%'))")
+    public List<Business> listBusinessByKeyWords(String KeyWord);
+
 }
