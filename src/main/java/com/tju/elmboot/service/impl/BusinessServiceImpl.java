@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+
+import static com.tju.elmboot.util.DistanceUtils.lonLatCalculation;
 
 @Service
 public class BusinessServiceImpl implements BusinessService {
@@ -23,5 +26,34 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     public Business getBusinessById(Integer businessId) {
         return businessMapper.getBusinessById(businessId);
+    }
+
+    @Override
+    public List<Business> listBusinessDefault() {
+        return businessMapper.listBusinessDefault();
+    }
+
+    @Override
+    public List<Business> listBusinessByDistance(String longitude, String latitude) {
+        Map<String,String> map;
+        map = lonLatCalculation(Double.valueOf(longitude),Double.valueOf(latitude),500000);
+        map.put("longitude",longitude);
+        map.put("latitude",latitude);
+        return businessMapper.listBusinessByDistance(map);
+    }
+
+    @Override
+    public List<Business> listBusinessBySales() {
+        return businessMapper.listBusinessBySales();
+    }
+
+    @Override
+    public List<Business> listBusinessByConditions(Integer orderTypeId, Double starPrice, Double deliveryPrice, Double distance, Double deliveryTime, Double longitude, Double latitude) {
+        return businessMapper.listBusinessByConditions(orderTypeId,starPrice,deliveryPrice,distance,deliveryTime,longitude,latitude);
+    }
+
+    @Override
+    public List<Business> listBusinessByKeyWords(String KeyWord) {
+        return businessMapper.listBusinessByKeyWords(KeyWord);
     }
 }
