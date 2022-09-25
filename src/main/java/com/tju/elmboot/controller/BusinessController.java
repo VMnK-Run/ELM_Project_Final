@@ -52,8 +52,6 @@ public class BusinessController {
         return businessService.listBusinessBySales();
     }
 
-    //暂未实现的功能:筛选
-
     @RequestMapping("/listBusinessByConditions")
     public List<Business> listBusinessByConditions(Integer orderTypeId,Double starPrice,Double deliveryPrice,Double distance,Double deliveryTime,Double longitude,Double latitude) throws Exception {
         return businessService.listBusinessByConditions(orderTypeId,starPrice,deliveryPrice,distance,deliveryTime,longitude,latitude);
