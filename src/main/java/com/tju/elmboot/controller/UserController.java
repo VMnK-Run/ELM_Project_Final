@@ -28,8 +28,8 @@ public class UserController {
         return userService.saveUser(user);
     }
 
-    @RequestMapping("/updateUser")
-    public int updateUser(User user) throws Exception {
-        return userService.updateUser(user);
+    @RequestMapping("/updateUserById")
+    public int updateUserById(User user) throws Exception {
+        return userService.updateUserById(user);
     }
 }
