@@ -2,6 +2,7 @@ package com.tju.elmboot.controller;
 
 import com.tju.elmboot.po.User;
 import com.tju.elmboot.service.UserService;
+import com.tju.elmboot.viewpo.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,5 +32,10 @@ public class UserController {
     @RequestMapping("/updateUserById")
     public int updateUserById(User user) throws Exception {
         return userService.updateUserById(user);
+    }
+
+    @RequestMapping("/getUserInfoById")
+    public UserInfo getUserInfoById(String userId) throws Exception {
+        return userService.getUserInfoById(userId);
     }
 }

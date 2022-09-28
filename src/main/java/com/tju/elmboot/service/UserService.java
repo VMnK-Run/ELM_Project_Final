@@ -1,6 +1,7 @@
 package com.tju.elmboot.service;
 
 import com.tju.elmboot.po.User;
+import com.tju.elmboot.viewpo.UserInfo;
 
 public interface UserService {
 
@@ -11,4 +12,6 @@ public interface UserService {
     public int saveUser(User user);
 
     public int updateUserById(User user);
+
+    public UserInfo getUserInfoById(String userId);
 }

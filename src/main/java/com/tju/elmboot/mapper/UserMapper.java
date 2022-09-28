@@ -20,4 +20,7 @@ public interface UserMapper {
     public int saveUser(User user);
 
     public int updateUserById(User user);
+
+    @Select("select * from user where userId=#{userId}")
+    public User getUserInfoById(String userId);
 }
