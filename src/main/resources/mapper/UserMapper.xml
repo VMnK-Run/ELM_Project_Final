@@ -13,7 +13,7 @@
             <if test="userName!=null and userName!='' ">
                 userName=#{userName},
             </if>
-            <if test="userSex!=null and userSex!='' ">
+            <if test="userSex!=null ">
                 userSex=#{userSex},
             </if>
             <if test="userImg!=null and userImg!='' ">
