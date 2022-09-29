@@ -19,6 +19,8 @@ public interface UserMapper {
     @Insert("insert into user values(#{userId},#{password},#{userName},#{userSex},null,1)")
     public int saveUser(User user);
 
-    @Update("update user set password=#{password}, userName=#{userName}, userSex=#{userSex}, userImg=#{userImg} where userId=#{userId}")
-    public int updateUser(User user);
+    public int updateUserById(User user);
+
+    @Select("select * from user where userId=#{userId}")
+    public User getUserInfoById(String userId);
 }
