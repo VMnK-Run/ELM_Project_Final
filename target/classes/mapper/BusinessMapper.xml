@@ -18,6 +18,7 @@
         <result column="latitude" property="latitude"/>
         <result column="score" property="score"/>
         <result column="distance" property="distance"/>
+        <result column="deliverytime" property="deliverytime"/>
     </resultMap>
 
     <resultMap id="listBusinessByConditionsMap" type="com.tju.elmboot.po.Business">
@@ -34,11 +35,21 @@
         <result column="latitude" property="latitude"/>
         <result column="score" property="score"/>
         <result column="distance" property="distance"/>
+        <result column="deliverytime" property="deliverytime"/>
     </resultMap>
 
     <update id="refreshDistance" parameterType="java.util.Map">
+        <if test="longitude != null and longitude != ''">
             update business set distance =  ROUND(lat_lng_distance(#{latitude}, #{longitude}, latitude, longitude), 2)
                             where 1=1;
+        </if>
+    </update>
+
+    <update id="refreshTime" parameterType="java.util.Map">
+        <if test="longitude != null and longitude != ''">
+        update business set deliverytime =  ROUND(lat_lng_distance(#{latitude}, #{longitude}, latitude, longitude), 2)<![CDATA[/]]>0.32<![CDATA[+]]>10
+        where 1=1;
+        </if>
     </update>
 
     <select id="listBusinessByDistance" parameterType="java.util.Map" resultMap="listBusinessByDistanceMap">
@@ -54,7 +65,8 @@
                b.deliveryPrice as deliveryPrice,
                b.remarks as remarks,
                b.score as score,
-               b.distance as distance
+               b.distance as distance,
+               b.deliverytime as deliverytime
                <if test="longitude != null and longitude != ''">,
                 ROUND(lat_lng_distance(#{latitude}, #{longitude}, latitude, longitude), 2) as distance
                </if>
@@ -79,7 +91,8 @@
                b.deliveryPrice as deliveryPrice,
                b.remarks as remarks,
                b.score as score,
-               b.distance as distance
+               b.distance as distance,
+               b.deliverytime as deliverytime
         from business b where 1=1
             <if test="orderTypeId != null">
                 and orderTypeId=#{orderTypeId}

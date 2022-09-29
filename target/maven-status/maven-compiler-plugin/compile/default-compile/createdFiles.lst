@@ -12,9 +12,12 @@ com\tju\elmboot\service\FoodService.class
 com\tju\elmboot\service\impl\CartServiceImpl.class
 com\tju\elmboot\service\CartService.class
 com\tju\elmboot\service\impl\FoodServiceImpl.class
+com\tju\elmboot\controller\CommentsController.class
 com\tju\elmboot\service\OrdersService.class
+com\tju\elmboot\service\CommentService.class
 com\tju\elmboot\controller\BusinessController.class
 com\tju\elmboot\util\DistanceUtils.class
+com\tju\elmboot\viewpo\UserInfo.class
 com\tju\elmboot\controller\FoodController.class
 com\tju\elmboot\po\Orders.class
 com\tju\elmboot\WebMvcConfig.class
@@ -29,10 +32,13 @@ com\tju\elmboot\controller\DeliveryAddressController.class
 com\tju\elmboot\mapper\FoodMapper.class
 com\tju\elmboot\mapper\DeliveryAddressMapper.class
 com\tju\elmboot\service\impl\OrdersServiceImpl.class
+com\tju\elmboot\service\impl\CommentServiceImpl.class
 com\tju\elmboot\po\User.class
+com\tju\elmboot\mapper\CommentMapper.class
 com\tju\elmboot\mapper\OrdersMapper.class
 com\tju\elmboot\po\Cart.class
 com\tju\elmboot\mapper\UserMapper.class
+com\tju\elmboot\po\Comment.class
 com\tju\elmboot\ElmbootApplication.class
 com\tju\elmboot\controller\OrdersController.class
 com\tju\elmboot\mapper\CartMapper.class
