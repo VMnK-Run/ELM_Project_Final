@@ -11,4 +11,6 @@ public interface FoodService {
     public Food getFoodByRandom();
 
     public List<Food> listFoodByTime();
+
+    public List<Food> listFoodByTimeDefaults();
 }
