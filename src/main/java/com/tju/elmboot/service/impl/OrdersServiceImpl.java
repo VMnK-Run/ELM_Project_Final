@@ -56,6 +56,9 @@ public class OrdersServiceImpl implements OrdersService {
         //4、从购物车表中删除相关食品信息
         cartMapper.removeCart(cart);
 
+        //5、商家增加一条订单数
+        ordersMapper.createOrders(orders);
+
         return orderId;
     }
 

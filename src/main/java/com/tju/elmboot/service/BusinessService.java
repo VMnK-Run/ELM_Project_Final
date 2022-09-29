@@ -10,13 +10,15 @@ public interface BusinessService {
 
     public Business getBusinessById(Integer businessId);
 
-    public List<Business> listBusinessDefault();
+    public List<Business> listBusinessDefault(String longitude, String latitude);
 
     public List<Business> listBusinessByDistance(String longitude, String latitude);
 
-    public List<Business> listBusinessBySales();
+    public List<Business> listBusinessBySales(String longitude, String latitude);
 
     public List<Business> listBusinessByKeyWords(String KeyWord);
 
-    public List<Business> listBusinessByConditions(Integer orderTypeId, Double starPrice, Double deliveryPrice, Double distance, Double deliveryTime, Double longitude, Double latitude);
+    public List<Business> listBusinessByConditions(Integer orderTypeId, Double starPrice, Double deliveryPrice, Double distance, Double deliveryTime, String longitude, String latitude);
+
+    public List<Business> listBusinessByScore(String longitude, String latitude);
 }

@@ -38,8 +38,8 @@ public class BusinessController {
     }
 
     @RequestMapping("/listBusinessDefault")
-    public List<Business> listBusinessDefault() throws Exception {
-        return businessService.listBusinessDefault();
+    public List<Business> listBusinessDefault(String longitude,String latitude) throws Exception {
+        return businessService.listBusinessDefault(longitude, latitude);
     }
 
     @RequestMapping("/listBusinessByDistance")
@@ -48,17 +48,22 @@ public class BusinessController {
     }
 
     @RequestMapping("/listBusinessBySales")
-    public List<Business> listBusinessBySales() throws Exception {
-        return businessService.listBusinessBySales();
+    public List<Business> listBusinessBySales(String longitude,String latitude) throws Exception {
+        return businessService.listBusinessBySales(longitude, latitude);
     }
 
     @RequestMapping("/listBusinessByConditions")
-    public List<Business> listBusinessByConditions(Integer orderTypeId,Double starPrice,Double deliveryPrice,Double distance,Double deliveryTime,Double longitude,Double latitude) throws Exception {
+    public List<Business> listBusinessByConditions(Integer orderTypeId,Double starPrice,Double deliveryPrice,Double distance,Double deliveryTime,String longitude,String latitude) throws Exception {
         return businessService.listBusinessByConditions(orderTypeId,starPrice,deliveryPrice,distance,deliveryTime,longitude,latitude);
     }
 
     @RequestMapping("/listBusinessByKeyWords")
     public List<Business> listBusinessByKeyWords(String KeyWord) throws Exception {
         return businessService.listBusinessByKeyWords(KeyWord);
+    }
+
+    @RequestMapping("/listBusinessByScore")
+    public List<Business> listBusinessByScore(String longitude, String latitude) throws Exception {
+        return businessService.listBusinessByScore(longitude, latitude);
     }
 } 

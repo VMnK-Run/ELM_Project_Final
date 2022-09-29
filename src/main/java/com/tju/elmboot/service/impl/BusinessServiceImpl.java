@@ -16,8 +16,6 @@ public class BusinessServiceImpl implements BusinessService {
 
     @Autowired
     private BusinessMapper businessMapper;
-
-
     @Override
     public List<Business> listBusinessByOrderTypeId(Integer orderTypeId) {
         return businessMapper.listBusinessByOrderTypeId(orderTypeId);
@@ -29,8 +27,14 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override
-    public List<Business> listBusinessDefault() {
-        return businessMapper.listBusinessDefault();
+    public List<Business> listBusinessDefault(String longitude, String latitude) {
+        Map<String,String> map;
+        map = lonLatCalculation(Double.valueOf(longitude),Double.valueOf(latitude),500000);
+        map.put("longitude",longitude);
+        map.put("latitude",latitude);
+        businessMapper.refreshDistance(map);
+        businessMapper.refreshTime(map);
+        return businessMapper.listBusinessDefault(map);
     }
 
     @Override
@@ -39,21 +43,48 @@ public class BusinessServiceImpl implements BusinessService {
         map = lonLatCalculation(Double.valueOf(longitude),Double.valueOf(latitude),500000);
         map.put("longitude",longitude);
         map.put("latitude",latitude);
+        businessMapper.refreshDistance(map);
+        businessMapper.refreshTime(map);
         return businessMapper.listBusinessByDistance(map);
     }
 
     @Override
-    public List<Business> listBusinessBySales() {
-        return businessMapper.listBusinessBySales();
+    public List<Business> listBusinessBySales(String longitude, String latitude) {
+        Map<String,String> map;
+        map = lonLatCalculation(Double.valueOf(longitude),Double.valueOf(latitude),500000);
+        map.put("longitude",longitude);
+        map.put("latitude",latitude);
+        businessMapper.refreshDistance(map);
+        businessMapper.refreshTime(map);
+        return businessMapper.listBusinessBySales(map);
     }
 
     @Override
-    public List<Business> listBusinessByConditions(Integer orderTypeId, Double starPrice, Double deliveryPrice, Double distance, Double deliveryTime, Double longitude, Double latitude) {
+    public List<Business> listBusinessByConditions(Integer orderTypeId, Double starPrice, Double deliveryPrice, Double distance, Double deliveryTime, String longitude, String latitude) {
+        if(longitude!="" && latitude!=""){
+            Map<String,String> map;
+            map = lonLatCalculation(Double.valueOf(longitude),Double.valueOf(latitude),500000);
+            map.put("longitude",longitude);
+            map.put("latitude",latitude);
+            businessMapper.refreshDistance(map);
+            businessMapper.refreshTime(map);
+        }
         return businessMapper.listBusinessByConditions(orderTypeId,starPrice,deliveryPrice,distance,deliveryTime,longitude,latitude);
     }
 
     @Override
     public List<Business> listBusinessByKeyWords(String KeyWord) {
         return businessMapper.listBusinessByKeyWords(KeyWord);
+    }
+
+    @Override
+    public List<Business> listBusinessByScore(String longitude, String latitude) {
+        Map<String,String> map;
+        map = lonLatCalculation(Double.valueOf(longitude),Double.valueOf(latitude),500000);
+        map.put("longitude",longitude);
+        map.put("latitude",latitude);
+        businessMapper.refreshDistance(map);
+        businessMapper.refreshTime(map);
+        return businessMapper.listBusinessByScore(map);
     }
 }

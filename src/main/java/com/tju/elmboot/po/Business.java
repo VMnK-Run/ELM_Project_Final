@@ -15,6 +15,14 @@ public class Business {
 
     private double latitude;
 
+    private double score;
+
+    private int orderCount;
+
+    private double distance;
+
+    private int deliverytime;
+
     public Integer getBusinessId() {
         return businessId;
     }
@@ -101,5 +109,37 @@ public class Business {
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public double getScore() {
+        return score;
+    }
+
+    public void setScore(double score) {
+        this.score = score;
+    }
+
+    public int getOrderCount() {
+        return orderCount;
+    }
+
+    public void setOrderCount(int orderCount) {
+        this.orderCount = orderCount;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
+    public int getDeliverytime() {
+        return deliverytime;
+    }
+
+    public void setDeliverytime(int deliverytime) {
+        this.deliverytime = deliverytime;
     }
 }

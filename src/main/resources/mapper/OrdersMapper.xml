@@ -28,7 +28,15 @@
     </select>
 
     <select id="listOrdersByUserId" parameterType="string" resultMap="ordersResultMap">
-        select * from orders where userId=#{userId} order by orderId
+        select * from orders where userId=#{userId} order by orderId;
     </select>
+
+    <insert id="saveOrders" parameterType="com.tju.elmboot.po.Orders" useGeneratedKeys="true" keyProperty="orderId">
+        insert into orders(userId,businessId,orderDate,orderTotal,daId,orderState) values(#{userId},#{businessId},#{orderDate},#{orderTotal},#{daId},0)
+    </insert>
+
+    <update id="createOrders" parameterType="com.tju.elmboot.po.Orders" >
+        update business set orderCount=orderCount+1 where businessId=#{businessId};
+    </update>
 
 </mapper>
