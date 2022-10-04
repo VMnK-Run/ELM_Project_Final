@@ -27,7 +27,7 @@ public interface BusinessMapper {
     public List<Business>listBusinessByConditions(Integer orderTypeId,Double starPrice,Double deliveryPrice,Double distance,Double deliveryTime,String longitude,String latitude);
 
     @Select("select * from business b where b.businessName like concat('%',#{0},'%') union all select * from business b where b.businessId = (select group_concat(businessId) from food f where f.foodName like concat('%',#{0},'%'))")
-    public List<Business> listBusinessByKeyWords(String KeyWord);
+    public List<Business> listBusinessByKeyWords(String keywords);
 
     @Select("select * from business order by score desc")
     public List<Business> listBusinessByScore(Map<String, String> map);

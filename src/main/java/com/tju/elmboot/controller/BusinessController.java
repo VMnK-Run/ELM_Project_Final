@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.security.Key;
 import java.util.List;
 
 @RestController
@@ -58,8 +59,9 @@ public class BusinessController {
     }
 
     @RequestMapping("/listBusinessByKeyWords")
-    public List<Business> listBusinessByKeyWords(String KeyWord) throws Exception {
-        return businessService.listBusinessByKeyWords(KeyWord);
+    public List<Business> listBusinessByKeyWords(String keywords) throws Exception {
+        keywords = keywords.replace(" ", "");
+        return businessService.listBusinessByKeyWords(keywords);
     }
 
     @RequestMapping("/listBusinessByScore")

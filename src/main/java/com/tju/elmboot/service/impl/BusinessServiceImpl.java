@@ -73,8 +73,8 @@ public class BusinessServiceImpl implements BusinessService {
     }
 
     @Override
-    public List<Business> listBusinessByKeyWords(String KeyWord) {
-        return businessMapper.listBusinessByKeyWords(KeyWord);
+    public List<Business> listBusinessByKeyWords(String keywords) {
+        return businessMapper.listBusinessByKeyWords(keywords);
     }
 
     @Override
