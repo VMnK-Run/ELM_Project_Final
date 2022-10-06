@@ -15,8 +15,9 @@ import java.util.List;
 public class CommentsController {
 
     @Autowired
-    private CommentService commentService;
+    private CommentService commentService;//动态注入commentService
 
+    //调用service层
     @RequestMapping("/listComment")
     public List<Comment> listComment(Comment comment) {
         return commentService.listComment(comment);

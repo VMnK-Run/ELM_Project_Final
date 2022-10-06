@@ -12,7 +12,9 @@ import java.util.List;
 public class CommentServiceImpl implements CommentService {
 
     @Autowired
-    private CommentMapper commentMapper;
+    private CommentMapper commentMapper;//动态注入commentMapper
+
+    //调用mapper层
     @Override
     public List<Comment> listComment(Comment comment){
         return commentMapper.listComment(comment);
