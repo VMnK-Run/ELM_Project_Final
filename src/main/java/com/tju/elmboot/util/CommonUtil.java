@@ -20,7 +20,7 @@ public class CommonUtil {
         } else {
             base = 2;
         }
-        int res = base + random.nextInt(1);
+        int res = base + random.nextInt(2);
         return res;
     }
 }
