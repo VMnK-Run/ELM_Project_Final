@@ -1,3 +1,5 @@
-/.idea/
-/target/
+.idea/*
+target/*
+.idea
+target
 /src/main/java/Test.java
