@@ -38,6 +38,17 @@ public final class DistanceUtils {
         return s;
     }
 
+    /**
+     * 根据商家的经纬度，计算配送范围（另一种方法，实际选用）
+     * @param longitude
+     * 商家所在经度
+     * @param latitude
+     * 商家所在纬度
+     * @param raidus
+     * 地球半径
+     * @return map
+     * 返回一个距离范围，在此范围之内的用户地址被认为是可以送达的
+     */
     public static Map<String,String> lonLatCalculation(Double longitude, Double latitude, Integer raidus){
         Map<String,String> map = new HashMap<String,String>();
         // 赤道周长24901英里 1609是转换成米的系数
