@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tju.elmboot.mapper.CreditMapper">
+
+    <resultMap id="creditResultMap" type="com.tju.elmboot.po.ValidCredit">
+        <id column="vcId" property="vcId"/>
+        <result column="userId" property="userId"/>
+        <result column="credit" property="credit"/>
+        <result column="createTime" property="createTime"/>
+        <result column="expiredTime" property="expiredTime"/>
+    </resultMap>
+
+    <resultMap id="creditVOResultMap" type="com.tju.elmboot.po.CreditVO">
+        <id column="creditDetailId" property="creditDetailId"/>
+        <result column="userId" property="userId"/>
+        <result column="channelId" property="channelId"/>
+        <result column="createTime" property="createTime"/>
+        <result column="expiredTime" property="expiredTime"/>
+    </resultMap>
+
+    <select id="getValidCredit" parameterType="string" resultMap="creditResultMap">
+        select * from validcredit where userId=#{userId};
+    </select>
+
+    <select id="getCreditTotalDetails" parameterType="string" resultMap="creditVOResultMap">
+        select * from creditdetails where userId=#{userId} order by creditDetailId desc;
+    </select>
+
+    <select id="getCreditOfAdd" parameterType="string" resultMap="creditVOResultMap">
+        select * from creditdetails where userId=#{userId} and credit > 0;
+    </select>
+
+    <select id="getCreditOfSpend" parameterType="string" resultMap="creditVOResultMap">
+        select * from creditdetails where userId=#{userId} and channelId='_SPEND_';
+    </select>
+
+    <select id="getCreditOfOutTime" parameterType="string" resultMap="creditVOResultMap">
+        select * from creditdetails where userId=#{userId} and channelId='_OT_';
+    </select>
+
+    <insert id="saveCreditDetail" parameterType="com.tju.elmboot.po.CreditEntity" useGeneratedKeys="true" keyProperty="creditDetailId">
+        insert into creditdetails(userId, channelId, eventId, credit, createTime, expiredTime) values(#{userId}, #{channelId}, #{eventId}, #{credit}, #{createTime}, #{expiredTime});
+    </insert>
+
+</mapper>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tju.elmboot.mapper.ValidCreditMapper">
+
+    <resultMap id="creditResultMap" type="com.tju.elmboot.po.ValidCredit">
+        <id column="vcId" property="vcId"/>
+        <result column="userId" property="userId"/>
+        <result column="credit" property="credit"/>
+        <result column="createTime" property="createTime"/>
+        <result column="expiredTime" property="expiredTime"/>
+    </resultMap>
+
+    <insert id="saveValidCredit" parameterType="com.tju.elmboot.po.ValidCredit" useGeneratedKeys="true" keyProperty="vcId">
+        insert into validcredit(userId, credit, createTime, expiredTime) values(#{userId}, #{credit}, #{createTime}, #{expiredTime});
+    </insert>
+
+    <select id="getAllValidCredit" parameterType="string" resultMap="creditResultMap">
+        select * from validcredit where userId=#{userId} order by expiredTime;
+    </select>
+
+    <select id="getOutTimeCredits" parameterType="string" resultMap="creditResultMap">
+        select * from validcredit where userId=#{userId} and now() > expiredTime;
+    </select>
+
+</mapper>

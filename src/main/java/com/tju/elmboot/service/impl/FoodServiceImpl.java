@@ -154,7 +154,10 @@ public class FoodServiceImpl implements FoodService {
         List<Map.Entry<Business, Double>> list1 = new ArrayList<>(businessMap.entrySet());
         list1.sort((o1, o2) -> o2.getValue().compareTo(o1.getValue()));
 
-        Business candidateBusiness = list1.get(0).getKey();
+        Random random = new Random();
+        int num = random.nextInt(4);
+        num = Math.min(num, candidateTypes.size() - 1);
+        Business candidateBusiness = list1.get(num).getKey();
         List<Food> foodList = foodMapper.listFoodByBusinessId(candidateBusiness.getBusinessId());
 
         Map<Food, Double> foodMap = new HashMap<>();
@@ -164,7 +167,7 @@ public class FoodServiceImpl implements FoodService {
         }
         List<Map.Entry<Food, Double>> list2 = new ArrayList<>(foodMap.entrySet());
         list2.sort(((o1, o2) -> o2.getValue().compareTo(o1.getValue())));
-        int num = 0;
+        num = 0;
         int randomNum = CommonUtil.getRandomNumber(hour);
         for(Map.Entry<Food, Double> entry : list2) {
             Food food = entry.getKey();

@@ -1,6 +1,7 @@
 package com.tju.elmboot.controller;
 
 import com.tju.elmboot.po.User;
+import com.tju.elmboot.service.CreditService;
 import com.tju.elmboot.service.UserService;
 import com.tju.elmboot.viewpo.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,12 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CreditService creditService;
+
     @RequestMapping("getUserByIdByPass")
     public User getUserByIdByPass(User user) throws Exception {
+        creditService.updateCredit(user.getUserId());
         return userService.getUserByIdByPass(user);
     }
 
@@ -26,7 +31,9 @@ public class UserController {
 
     @RequestMapping("/saveUser")
     public int saveUser(User user) throws Exception {
-        return userService.saveUser(user);
+        int userId = userService.saveUser(user);
+        int creditId = creditService.saveCreditForNewUser(user.getUserId());
+        return userId;
     }
 
     @RequestMapping("/updateUserById")
