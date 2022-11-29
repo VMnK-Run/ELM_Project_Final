@@ -113,6 +113,8 @@ public class CreditServiceImpl implements CreditService {
     @Override
     @Transactional
     public int spendCredit(String userId, String channelId, int eventId, int credit) {
+        /*TODO:改成充血模型，也就是BO弄成充血模型,方法可以是将Entity转换成这个BO，即一个人的可用积分是一个充血模型类，从这个可用积分里进行扣除
+        * */
         if(getTotalCredit(userId) < credit) {
             return -1;
         }

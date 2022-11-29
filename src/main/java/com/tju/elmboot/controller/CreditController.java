@@ -38,8 +38,8 @@ public class CreditController {
         return creditService.getCreditTotalDetails(userId);
     }
 
-    @RequestMapping("/getCreditTotalDetailsByParam")
-    public List<CreditVO> getCreditTotalDetailsByParam(String userId, int spend) throws Exception {
-        return creditService.getCreditByParam(userId, spend);
+    @RequestMapping("/getCreditByParam")
+    public List<CreditVO> getCreditTotalDetailsByParam(String userId, int param) throws Exception {
+        return creditService.getCreditByParam(userId, param);
     }
 }
