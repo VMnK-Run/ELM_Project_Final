@@ -1,0 +1,461 @@
+@startuml
+class com.tju.elmboot.po.OrderDetailet {
+- Integer odId
+- Integer orderId
+- Integer foodId
+- Integer quantity
+- Food food
++ Food getFood()
++ void setFood(Food)
++ Integer getOdId()
++ void setOdId(Integer)
++ Integer getOrderId()
++ void setOrderId(Integer)
++ Integer getFoodId()
++ void setFoodId(Integer)
++ Integer getQuantity()
++ void setQuantity(Integer)
+}
+interface com.tju.elmboot.service.DeliveryAddressService {
++ List<DeliveryAddress> listDeliveryAddressByUserId(String)
++ DeliveryAddress getDeliveryAddressById(Integer)
++ int saveDeliveryAddress(DeliveryAddress)
++ int updateDeliveryAddress(DeliveryAddress)
++ int removeDeliveryAddress(Integer)
+}
+class com.tju.elmboot.po.Cart {
+- Integer cartId
+- Integer foodId
+- Integer businessId
+- String userId
+- Integer quantity
+- Food food
+- Business business
++ Food getFood()
++ void setFood(Food)
++ Business getBusiness()
++ void setBusiness(Business)
++ Integer getCartId()
++ void setCartId(Integer)
++ Integer getFoodId()
++ void setFoodId(Integer)
++ Integer getBusinessId()
++ void setBusinessId(Integer)
++ String getUserId()
++ void setUserId(String)
++ Integer getQuantity()
++ void setQuantity(Integer)
+}
+class com.tju.elmboot.controller.BusinessController {
+- BusinessService businessService
++ List<Business> listBusinessByOrderTypeId(Business)
++ Business getBusinessById(Business)
++ List<Business> listBusinessDefault(String,String)
++ List<Business> listBusinessByDistance(String,String)
++ List<Business> listBusinessBySales(String,String)
++ List<Business> listBusinessByConditions(Integer,Double,Double,Double,Double,String,String)
++ List<Business> listBusinessByKeyWords(String)
++ List<Business> listBusinessByScore(String,String)
+}
+interface com.tju.elmboot.service.BusinessService {
++ List<Business> listBusinessByOrderTypeId(Integer)
++ Business getBusinessById(Integer)
++ List<Business> listBusinessDefault(String,String)
++ List<Business> listBusinessByDistance(String,String)
++ List<Business> listBusinessBySales(String,String)
++ List<Business> listBusinessByKeyWords(String)
++ List<Business> listBusinessByConditions(Integer,Double,Double,Double,Double,String,String)
++ List<Business> listBusinessByScore(String,String)
+}
+class com.tju.elmboot.controller.FoodController {
+- FoodService foodService
++ List<Food> listFoodByBusinessId(Food)
++ Food getFoodByRandom()
++ List<Food> listFoodByTime()
+}
+class com.tju.elmboot.service.impl.FoodServiceImpl {
+- FoodMapper foodMapper
+- BusinessMapper businessMapper
+- CommentMapper commentMapper
++ List<Food> listFoodByBusinessId(Integer)
++ Food getFoodByRandom()
++ List<Food> listFoodByTimeDefaults()
++ List<Food> listFoodByTime()
+- Double getAverageStarOfObject(Object)
+}
+interface com.tju.elmboot.mapper.DeliveryAddressMapper {
++ List<DeliveryAddress> listDeliveryAddressByUserId(String)
++ DeliveryAddress getDeliveryAddressById(Integer)
++ int saveDeliveryAddress(DeliveryAddress)
++ int updateDeliveryAddress(DeliveryAddress)
++ int removeDeliveryAddress(Integer)
+}
+class Test {
++ {static} void main(String[])
+}
+class com.tju.elmboot.controller.CommentsController {
+- CommentService commentService
++ List<Comment> listComment(Comment)
++ int saveComment(Comment)
++ Comment getCommentById(Integer)
++ int removeComment(Integer)
++ int updateComment(Comment)
+}
+class com.tju.elmboot.util.DistanceUtils {
+- {static} double EARTH_RADIUS
++ {static} double getDistance(double,double,double,double)
++ {static} Map<String,String> lonLatCalculation(Double,Double,Integer)
+}
+interface com.tju.elmboot.mapper.BusinessMapper {
++ List<Business> listBusinessByOrderTypeId(Integer)
++ Business getBusinessById(Integer)
++ List<Business> listBusinessDefault(Map<String,String>)
++ List<Business> listBusinessByDistance(Map<String,String>)
++ List<Business> listBusinessBySales(Map<String,String>)
++ List<Business> listBusinessByConditions(Integer,Double,Double,Double,Double,String,String)
++ List<Business> listBusinessByKeyWords(String)
++ List<Business> listBusinessByScore(Map<String,String>)
++ void refreshDistance(Map<String,String>)
++ void refreshTime(Map<String,String>)
+}
+class com.tju.elmboot.po.User {
+- String userId
+- String password
+- String userName
+- int userSex
+- String userImg
+- int delTag
++ String getUserId()
++ void setUserId(String)
++ String getPassword()
++ void setPassword(String)
++ String getUserName()
++ void setUserName(String)
++ int getUserSex()
++ void setUserSex(int)
++ String getUserImg()
++ void setUserImg(String)
++ int getDelTag()
++ void setDelTag(int)
+}
+class com.tju.elmboot.service.impl.CommentServiceImpl {
+- CommentMapper commentMapper
++ List<Comment> listComment(Comment)
++ int saveComment(Comment)
++ Comment getCommentById(Integer)
++ int removeComment(Integer)
++ int updateComment(Comment)
+}
+class com.tju.elmboot.service.impl.UserServiceImpl {
+- UserMapper userMapper
++ User getUserByIdByPass(User)
++ int getUserById(String)
++ int saveUser(User)
++ int updateUserById(User)
++ UserInfo getUserInfoById(String)
+}
+interface com.tju.elmboot.mapper.CommentMapper {
++ List<Comment> listComment(Comment)
++ int saveComment(Comment)
++ Comment getCommentById(Integer)
++ int updateComment(Comment)
++ int removeComment(Integer)
+}
+class com.tju.elmboot.po.DeliveryAddress {
+- Integer daId
+- String contactName
+- Integer contactSex
+- String contactTel
+- String address
+- String userId
++ Integer getDaId()
++ void setDaId(Integer)
++ String getContactName()
++ void setContactName(String)
++ Integer getContactSex()
++ void setContactSex(Integer)
++ String getContactTel()
++ void setContactTel(String)
++ String getAddress()
++ void setAddress(String)
++ String getUserId()
++ void setUserId(String)
+}
+interface com.tju.elmboot.mapper.UserMapper {
++ User getUserByIdByPass(User)
++ int getUserById(String)
++ int saveUser(User)
++ int updateUserById(User)
++ User getUserInfoById(String)
+}
+interface com.tju.elmboot.service.CartService {
++ List<Cart> listCart(Cart)
++ int saveCart(Cart)
++ int updateCart(Cart)
++ int removeCart(Cart)
+}
+class com.tju.elmboot.po.Business {
+- Integer businessId
+- String businessName
+- String businessAddress
+- String businessExplain
+- String businessImg
+- Integer orderTypeId
+- Double starPrice
+- Double deliveryPrice
+- String remarks
+- double longitude
+- double latitude
+- double score
+- int orderCount
+- double distance
+- int deliverytime
++ Integer getBusinessId()
++ void setBusinessId(Integer)
++ String getBusinessName()
++ void setBusinessName(String)
++ String getBusinessAddress()
++ void setBusinessAddress(String)
++ String getBusinessExplain()
++ void setBusinessExplain(String)
++ String getBusinessImg()
++ void setBusinessImg(String)
++ Integer getOrderTypeId()
++ void setOrderTypeId(Integer)
++ Double getStarPrice()
++ void setStarPrice(Double)
++ Double getDeliveryPrice()
++ void setDeliveryPrice(Double)
++ String getRemarks()
++ void setRemarks(String)
++ double getLongitude()
++ void setLongitude(double)
++ double getLatitude()
++ void setLatitude(double)
++ double getScore()
++ void setScore(double)
++ int getOrderCount()
++ void setOrderCount(int)
++ double getDistance()
++ void setDistance(double)
++ int getDeliverytime()
++ void setDeliverytime(int)
+}
+class com.tju.elmboot.controller.DeliveryAddressController {
+- DeliveryAddressService deliveryAddressService
++ List<DeliveryAddress> listDeliveryAddressByUserId(DeliveryAddress)
++ DeliveryAddress getDeliveryAddressById(DeliveryAddress)
++ int saveDeliveryAddress(DeliveryAddress)
++ int updateDeliveryAddress(DeliveryAddress)
++ int removeDeliveryAddress(DeliveryAddress)
+}
+class com.tju.elmboot.service.impl.OrdersServiceImpl {
+- CartMapper cartMapper
+- OrdersMapper ordersMapper
+- OrderDetailetMapper orderDetailetMapper
++ int createOrders(Orders)
++ Orders getOrdersById(Integer)
++ List<Orders> listOrdersByUserId(String)
+}
+class com.tju.elmboot.service.impl.CartServiceImpl {
+- CartMapper cartMapper
++ List<Cart> listCart(Cart)
++ int saveCart(Cart)
++ int updateCart(Cart)
++ int removeCart(Cart)
+}
+class com.tju.elmboot.WebMvcConfig {
++ WebMvcConfigurer corsConfigurer()
+}
+class com.tju.elmboot.controller.UserController {
+- UserService userService
++ User getUserByIdByPass(User)
++ int getUserById(User)
++ int saveUser(User)
++ int updateUserById(User)
++ UserInfo getUserInfoById(String)
+}
+interface com.tju.elmboot.mapper.OrdersMapper {
++ void saveOrders(Orders)
++ int createOrders(Orders)
++ Orders getOrdersById(Integer)
++ List<Orders> listOrdersByUserId(String)
+}
+class com.tju.elmboot.service.impl.BusinessServiceImpl {
+- BusinessMapper businessMapper
++ List<Business> listBusinessByOrderTypeId(Integer)
++ Business getBusinessById(Integer)
++ List<Business> listBusinessDefault(String,String)
++ List<Business> listBusinessByDistance(String,String)
++ List<Business> listBusinessBySales(String,String)
++ List<Business> listBusinessByConditions(Integer,Double,Double,Double,Double,String,String)
++ List<Business> listBusinessByKeyWords(String)
++ List<Business> listBusinessByScore(String,String)
+}
+class com.tju.elmboot.controller.CartController {
+- CartService cartService
++ List<Cart> listCart(Cart)
++ int saveCart(Cart)
++ int updateCart(Cart)
++ int removeCart(Cart)
+}
+interface com.tju.elmboot.service.OrdersService {
++ int createOrders(Orders)
++ Orders getOrdersById(Integer)
++ List<Orders> listOrdersByUserId(String)
+}
+interface com.tju.elmboot.service.UserService {
++ User getUserByIdByPass(User)
++ int getUserById(String)
++ int saveUser(User)
++ int updateUserById(User)
++ UserInfo getUserInfoById(String)
+}
+class com.tju.elmboot.service.impl.DeliveryAddressServiceImpl {
+- DeliveryAddressMapper deliveryAddressMapper
++ List<DeliveryAddress> listDeliveryAddressByUserId(String)
++ DeliveryAddress getDeliveryAddressById(Integer)
++ int saveDeliveryAddress(DeliveryAddress)
++ int updateDeliveryAddress(DeliveryAddress)
++ int removeDeliveryAddress(Integer)
+}
+class com.tju.elmboot.po.Food {
+- Integer foodId
+- String foodName
+- String foodExplain
+- String foodImg
+- Double foodPrice
+- Integer businessId
+- String remarks
++ Integer getFoodId()
++ void setFoodId(Integer)
++ String getFoodName()
++ void setFoodName(String)
++ String getFoodExplain()
++ void setFoodExplain(String)
++ String getFoodImg()
++ void setFoodImg(String)
++ Double getFoodPrice()
++ void setFoodPrice(Double)
++ Integer getBusinessId()
++ void setBusinessId(Integer)
++ String getRemarks()
++ void setRemarks(String)
+}
+interface com.tju.elmboot.service.FoodService {
++ List<Food> listFoodByBusinessId(Integer)
++ Food getFoodByRandom()
++ List<Food> listFoodByTime()
++ List<Food> listFoodByTimeDefaults()
+}
+class com.tju.elmboot.po.Orders {
+- Integer orderId
+- String userId
+- Integer businessId
+- String orderDate
+- Double orderTotal
+- Integer daId
+- Integer orderState
+- Business business
+- List<OrderDetailet> list
++ List<OrderDetailet> getList()
++ void setList(List<OrderDetailet>)
++ Integer getOrderId()
++ void setOrderId(Integer)
++ String getUserId()
++ void setUserId(String)
++ Integer getBusinessId()
++ void setBusinessId(Integer)
++ String getOrderDate()
++ void setOrderDate(String)
++ Double getOrderTotal()
++ void setOrderTotal(Double)
++ Integer getDaId()
++ void setDaId(Integer)
++ Integer getOrderState()
++ void setOrderState(Integer)
++ Business getBusiness()
++ void setBusiness(Business)
+}
+class com.tju.elmboot.ElmbootApplication {
++ {static} void main(String[])
+}
+interface com.tju.elmboot.mapper.CartMapper {
++ List<Cart> listCart(Cart)
++ int saveCart(Cart)
++ int updateCart(Cart)
++ int removeCart(Cart)
+}
+class com.tju.elmboot.controller.OrdersController {
+- OrdersService ordersService
++ int createOrders(Orders)
++ Orders getOrdersById(Orders)
++ List<Orders> listOrdersByUserId(Orders)
+}
+interface com.tju.elmboot.service.CommentService {
++ List<Comment> listComment(Comment)
++ int saveComment(Comment)
++ Comment getCommentById(Integer)
++ int removeComment(Integer)
++ int updateComment(Comment)
+}
+interface com.tju.elmboot.mapper.OrderDetailetMapper {
++ int saveOrderDetailetBatch(List<OrderDetailet>)
++ List<OrderDetailet> listOrderDetailetByOrderId(Integer)
+}
+class com.tju.elmboot.viewpo.UserInfo {
+- String userId
+- String userName
+- int userSex
++ String getUserId()
++ void setUserId(String)
++ String getUserName()
++ void setUserName(String)
++ int getUserSex()
++ void setUserSex(int)
+}
+class com.tju.elmboot.util.CommonUtil {
++ {static} String getCurrentDate()
++ {static} Integer getRandomNumber(int)
+}
+class com.tju.elmboot.po.Comment {
+- String userId
+- int businessId
+- int foodId
+- String content
+- String img
+- int cmId
+- int star
++ int getCmId()
++ void setCmId(int)
++ String getUserId()
++ void setUserId(String)
++ int getBusinessId()
++ void setBusinessId(int)
++ int getFoodId()
++ void setFoodId(int)
++ String getContent()
++ void setContent(String)
++ String getImg()
++ void setImg(String)
++ int getStar()
++ void setStar(int)
+}
+class com.tju.elmboot.ElmbootApplicationTests {
+~ void contextLoads()
+}
+interface com.tju.elmboot.mapper.FoodMapper {
++ List<Food> listFoodByBusinessId(Integer)
++ Food getFoodById(Integer)
++ List<Food> listAllFood()
+}
+
+
+com.tju.elmboot.service.FoodService <|.. com.tju.elmboot.service.impl.FoodServiceImpl
+com.tju.elmboot.service.CommentService <|.. com.tju.elmboot.service.impl.CommentServiceImpl
+com.tju.elmboot.service.UserService <|.. com.tju.elmboot.service.impl.UserServiceImpl
+com.tju.elmboot.service.OrdersService <|.. com.tju.elmboot.service.impl.OrdersServiceImpl
+com.tju.elmboot.service.CartService <|.. com.tju.elmboot.service.impl.CartServiceImpl
+com.tju.elmboot.service.BusinessService <|.. com.tju.elmboot.service.impl.BusinessServiceImpl
+com.tju.elmboot.service.DeliveryAddressService <|.. com.tju.elmboot.service.impl.DeliveryAddressServiceImpl
+@enduml

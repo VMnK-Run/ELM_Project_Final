@@ -1,6 +1,3 @@
-.idea/*
-target/*
-.idea
-target
-/src/main/java/Test.java
-elm_uml.puml
+/.idea/
+/target/
+src/main/java/Test.java

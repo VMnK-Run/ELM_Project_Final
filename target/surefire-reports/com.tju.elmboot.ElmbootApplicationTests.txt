@@ -1,8 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.tju.elmboot.ElmbootApplicationTests
--------------------------------------------------------------------------------
-<<<<<<< HEAD
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.71 s - in com.tju.elmboot.ElmbootApplicationTests
-=======
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.638 s - in com.tju.elmboot.ElmbootApplicationTests
->>>>>>> d43540a4dccab1af66ae965065c1ce98994c5d28
