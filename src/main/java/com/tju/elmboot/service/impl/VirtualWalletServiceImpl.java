@@ -12,7 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class WalletServiceImpl implements WalletService {
+public class VirtualWalletServiceImpl implements WalletService {
 
     @Autowired
     private WalletMapper walletMapper;
@@ -25,13 +25,13 @@ public class WalletServiceImpl implements WalletService {
         return walletMapper.updataBalance(userId,balance);
     }
 
-    public int pay(String userId,String outId,double amount,Integer type){
-        double thisbalance=getWalletMessage(userId).getBalance();
+    public int pay(String outId,double amount,Integer type){
+        double elmbalance=getWalletMessage("elm10086").getBalance();
         double outbalance=getWalletMessage(outId).getBalance();
-        int now=updataBalance(outId,outbalance+amount)+updataBalance(userId,thisbalance-amount);
+        int now=updataBalance(outId,outbalance-amount)+updataBalance("elm10086",elmbalance+amount);
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
-        int p=walletMapper.saveTransaction(0,formatter.format(date),amount,type,outId,userId);
+        int p=walletMapper.saveTransaction(0,formatter.format(date),amount,type,"elm10086",outId);
         return now;
     }
 

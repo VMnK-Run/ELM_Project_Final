@@ -10,7 +10,7 @@ public interface WalletService {
 
     public int updataBalance(String userId,double balance);
 
-    public int pay(String userId,String outId,double amount,Integer type);
+    public int pay(String outId,double amount,Integer type);
 
     public List<VirtualWalletTransaction> listTransaction(String userId);
 

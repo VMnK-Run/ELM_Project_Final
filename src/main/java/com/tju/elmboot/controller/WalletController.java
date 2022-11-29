@@ -1,7 +1,6 @@
 package com.tju.elmboot.controller;
 
 import com.tju.elmboot.po.VirtualWallet;
-import com.tju.elmboot.po.VirtualWalletService;
 import com.tju.elmboot.po.VirtualWalletTransaction;
 import com.tju.elmboot.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +27,8 @@ public class WalletController {
     }
 
     @RequestMapping("/pay")
-    public int pay(String inId,String outId,double amount,Integer type){
-        return walletService.pay(outId,inId, amount, type);
+    public int pay(String outId,double amount,Integer type){
+        return walletService.pay(outId, amount, type);
     }
 
     @RequestMapping("/transaction")

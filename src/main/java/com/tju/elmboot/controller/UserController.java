@@ -3,6 +3,7 @@ package com.tju.elmboot.controller;
 import com.tju.elmboot.po.User;
 import com.tju.elmboot.service.CreditService;
 import com.tju.elmboot.service.UserService;
+import com.tju.elmboot.service.WalletService;
 import com.tju.elmboot.viewpo.UserInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,9 @@ public class UserController {
 
     @Autowired
     private CreditService creditService;
+
+    @Autowired
+    private WalletService walletService;
 
     @RequestMapping("getUserByIdByPass")
     public User getUserByIdByPass(User user) throws Exception {
@@ -33,6 +37,7 @@ public class UserController {
     public int saveUser(User user) throws Exception {
         int userId = userService.saveUser(user);
         int creditId = creditService.saveCreditForNewUser(user.getUserId());
+        int walletid=walletService.saveWallet(user.getUserId(),0);
         return userId;
     }
 
