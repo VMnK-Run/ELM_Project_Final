@@ -18,7 +18,7 @@ public class CreditController {
     @Autowired
     private CreditService creditService;
 
-    @RequestMapping("/spendOrders")
+    @RequestMapping("/spendCredit")
     public int spendCredit(String userId, String channelId, int eventId, int credit) throws Exception {
         return creditService.spendCredit(userId, channelId, eventId, credit);
     }
