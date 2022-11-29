@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tju.elmboot.mapper.WalletMapper">
+
+    <resultMap id="TransactionResultMap" type="com.tju.elmboot.po.VirtualWalletTransaction">
+        <result column="transactionId" property="transactionId"/>
+        <result column="transactionTime" property="transactionTime"/>
+        <result column="amount" property="amount"/>
+        <result column="transactionType" property="transactionType"/>
+        <result column="inId" property="inId"/>
+        <result column="outId" property="outId"/>
+    </resultMap>
+    <select id="listTransaction" parameterType="string" resultMap="TransactionResultMap">
+        select * from walletTransaction
+        <where>
+            inId=#{userId}
+                or
+            outId=#{userId}
+        </where>
+    </select>
+</mapper>
