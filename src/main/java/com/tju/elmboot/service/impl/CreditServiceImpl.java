@@ -52,7 +52,6 @@ public class CreditServiceImpl implements CreditService {
             return creditMapper.getCreditOfOutTime(userId);
         }
     }
-
     @Override
     @Transactional
     public int saveCreditByOrder(int orderId) {
