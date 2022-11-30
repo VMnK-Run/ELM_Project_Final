@@ -29,8 +29,8 @@ public class VirtualWalletServiceImpl implements WalletService {
 
     public int pay(String outId,double amount,Integer type){
         double elmbalance=getWalletMessage("elm10086").getBalance();
-        double outbalance=getWalletMessage(outId).getBalance();
-        int now=updataBalance(outId,outbalance-amount)+updataBalance("elm10086",elmbalance+amount);
+        VirtualWallet wallet=getWalletMessage(outId);
+        int now=updataBalance(outId,wallet.pay(amount))+updataBalance("elm10086",elmbalance+amount);
         SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
         Date date = new Date(System.currentTimeMillis());
         int p=walletMapper.saveTransaction(0,formatter.format(date),amount,type,"elm10086",outId);
