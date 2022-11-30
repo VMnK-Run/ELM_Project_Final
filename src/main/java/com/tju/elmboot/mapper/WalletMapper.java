@@ -29,4 +29,7 @@ public interface WalletMapper {
 
     @Update("update wallet set balance=balance+#{amount} where userId=#{inId}")
     public void fund(@Param("inId") String inId, @Param("amount") Double amount);
+
+    @Update("update wallet set balance=#{balance} where userId=#{userId}")
+    public void updateWallet(VirtualWallet wallet);
 }
