@@ -1,6 +1,6 @@
 package com.tju.elmboot.util;
 
-public class CreditConfig {
+public interface CreditConfig {
     public static Integer moneyForOneCredit = 5; // 兑换一个积分需要的钱数
 
     public static Integer PointsForOneYuan = 50; // 50个积分抵扣一元
@@ -8,9 +8,6 @@ public class CreditConfig {
     public static Integer validDays = 30; // 积分有效天数
     public static Integer newCredit = 300; // 新用户注册默认积分
 
-    public static int calculateCreditByPrice(double price) {
-        int credit = (int) (price / moneyForOneCredit);
-        return credit;
-    }
+    int calculateCreditByPrice(double price);
 
 }

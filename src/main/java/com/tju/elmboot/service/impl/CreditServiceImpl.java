@@ -8,6 +8,7 @@ import com.tju.elmboot.po.*;
 import com.tju.elmboot.service.CreditService;
 import com.tju.elmboot.util.ChannelId;
 import com.tju.elmboot.util.CreditConfig;
+import com.tju.elmboot.util.CreditConfigImpl;
 import com.tju.elmboot.util.SQLTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -61,7 +62,8 @@ public class CreditServiceImpl implements CreditService {
         creditEntity.setChannelId(ChannelId.addCreditByOrder);
         creditEntity.setEventId(orderId);
         double price = orders.getOrderTotal();
-        int credit = CreditConfig.calculateCreditByPrice(price);
+        CreditConfig creditConfig = new CreditConfigImpl();
+        int credit = creditConfig.calculateCreditByPrice(price);
         creditEntity.setCredit(credit);
         Date createTime = SQLTimeUtil.getNowDate();
         Date expiredTime = SQLTimeUtil.addDays(createTime, CreditConfig.validDays);
