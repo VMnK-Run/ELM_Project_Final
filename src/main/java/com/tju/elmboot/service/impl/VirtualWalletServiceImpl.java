@@ -50,9 +50,9 @@ public class VirtualWalletServiceImpl implements WalletService {
     @Transactional
     @Override
     public void withdraw(String outId, Double amount) {
-        VirtualWallet wallet = walletMapper.getWalletMessage(outId);
-        wallet.withdraw(amount);
-        walletMapper.updateWallet(wallet);
+        VirtualWalletBO walletBO = new VirtualWalletBO(walletMapper.getWalletMessage(outId));
+        walletBO.withdraw(amount);
+        walletMapper.updateWallet(walletBO);
 
         TransactionEntity transactionEntity = new TransactionEntity();
 
@@ -73,9 +73,9 @@ public class VirtualWalletServiceImpl implements WalletService {
     @Transactional
     @Override
     public void fund(String inId, Double amount) {
-        VirtualWallet wallet = walletMapper.getWalletMessage(inId);
-        wallet.fund(amount);
-        walletMapper.updateWallet(wallet);
+        VirtualWalletBO walletBO = new VirtualWalletBO(walletMapper.getWalletMessage(inId));
+        walletBO.fund(amount);
+        walletMapper.updateWallet(walletBO);
 
         TransactionEntity transactionEntity = new TransactionEntity();
 

@@ -33,14 +33,14 @@ public class VirtualWallet {
 
     public Double balance;
 
-    public void withdraw(Double amount){
-        if(this.balance - amount >= 0) {
-            this.balance -= amount;
-        }
-        else this.balance = Double.valueOf(0);
-    }
-
-    public void fund(Double amount){
-        this.balance += amount;
-    }
+//    public void withdraw(Double amount){
+//        if(this.balance - amount >= 0) {
+//            this.balance -= amount;
+//        }
+//        else this.balance = Double.valueOf(0);
+//    }
+//
+//    public void fund(Double amount){
+//        this.balance += amount;
+//    }
 }
