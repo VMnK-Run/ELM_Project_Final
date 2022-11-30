@@ -1,3 +1,4 @@
 /.idea/
 /target/
 src/main/java/Test.java
+src/main/resources/application.properties

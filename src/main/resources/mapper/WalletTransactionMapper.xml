@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.tju.elmboot.mapper.WalletTransactionMapper">
+    <insert id="saveTransaction" parameterType="com.tju.elmboot.po.TransactionEntity" useGeneratedKeys="true" keyProperty="transactionId">
+        insert into wallettransaction(transactionTime, amount, transactionType, inId, outId) values(#{transactionTime}, #{amount}, #{transactionType}, #{inId}, #{outId});
+    </insert>
+</mapper>

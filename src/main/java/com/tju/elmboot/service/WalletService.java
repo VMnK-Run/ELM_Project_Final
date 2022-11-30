@@ -15,4 +15,8 @@ public interface WalletService {
     public List<VirtualWalletTransaction> listTransaction(String userId);
 
     public int saveWallet(String userId,double balance);
+
+    public void withdraw(String outId, Double amount);
+
+    public void fund(String inId, Double amount);
 }
