@@ -28,13 +28,13 @@ public class VirtualWalletTransaction {
         this.amount = amount;
     }
 
-    public int getTransactionType() {
-        return transactionType;
-    }
-
-    public void setTransactionType(int transactionType) {
-        this.transactionType = transactionType;
-    }
+//    public int getTransactionType() {
+//        return transactionType;
+//    }
+//
+//    public void setTransactionType(int transactionType) {
+//        this.transactionType = transactionType;
+//    }
 
     public String getInId() {
         return inId;
