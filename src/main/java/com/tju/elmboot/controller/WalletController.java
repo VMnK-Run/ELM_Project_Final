@@ -40,4 +40,14 @@ public class WalletController {
     public int saveWallet(String userId,double balance){
         return walletService.saveWallet(userId,balance);
     }
+
+    @RequestMapping("/fund")
+    public void fund(String inId, Double amount){
+        walletService.fund(inId, amount);
+    }
+
+    @RequestMapping("/withdraw")
+    public void withdraw(String outId, Double amount){
+        walletService.withdraw(outId, amount);
+    }
 }
