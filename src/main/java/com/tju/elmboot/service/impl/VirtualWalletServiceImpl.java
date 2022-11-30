@@ -50,21 +50,24 @@ public class VirtualWalletServiceImpl implements WalletService {
     @Transactional
     @Override
     public void withdraw(String outId, Double amount) {
-        walletMapper.withdraw(outId, amount);
-        TransactionEntity transactionEntity = new TransactionEntity();
+        VirtualWallet wallet = walletMapper.getWalletMessage(outId);
+        if(wallet.balance - amount >= 0) {
+            walletMapper.withdraw(outId, amount);
+            TransactionEntity transactionEntity = new TransactionEntity();
 
-        transactionEntity.setAmount(amount);
+            transactionEntity.setAmount(amount);
 
-        Date date = new Date(System.currentTimeMillis());
-        SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-        transactionEntity.setTransactionTime(formatter.format(date));
+            Date date = new Date(System.currentTimeMillis());
+            SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+            transactionEntity.setTransactionTime(formatter.format(date));
 
-        transactionEntity.setTransactionType(1);
+            transactionEntity.setTransactionType(1);
 
-        transactionEntity.setOutId(outId);
-        transactionEntity.setInId("");
+            transactionEntity.setOutId(outId);
+            transactionEntity.setInId("");
 
-        transactionMapper.saveTransaction(transactionEntity);
+            transactionMapper.saveTransaction(transactionEntity);
+        }
     }
 
     @Transactional
