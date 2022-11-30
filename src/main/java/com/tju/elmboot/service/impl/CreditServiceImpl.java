@@ -33,12 +33,8 @@ public class CreditServiceImpl implements CreditService {
 
     @Override
     public int getTotalCredit(String userId) {
-        List<ValidCredit> validCredits = getValidCredits(userId);
-        int totalCredit = 0;
-        for(ValidCredit validCredit : validCredits) {
-            totalCredit += validCredit.getCredit();
-        }
-        return totalCredit;
+        CreditBO creditBO = new CreditBO(userId, getValidCredits(userId));
+        return creditBO.getTotalCredit();
     }
 
     @Override
@@ -115,30 +111,16 @@ public class CreditServiceImpl implements CreditService {
     public int spendCredit(String userId, String channelId, int eventId, int credit) {
         /*TODO:改成充血模型，也就是BO弄成充血模型,方法可以是将Entity转换成这个BO，即一个人的可用积分是一个充血模型类，从这个可用积分里进行扣除
         * */
-        if(getTotalCredit(userId) < credit) {
+        CreditBO creditBO = new CreditBO(userId, validCreditMapper.getAllValidCredit(userId));
+        boolean success = creditBO.spendCredit(credit);
+        if(!success) {
             return -1;
         }
-        List<ValidCredit> validCreditList = validCreditMapper.getAllValidCredit(userId);
-        int nowSum = 0;
-        int index = 0;
-        for(ValidCredit validCredit : validCreditList) {
-            nowSum += validCredit.getCredit();
-            if(nowSum >= credit) {
-                break;
-            }
-            index++;
+        for (int i : creditBO.getIndexOfRemove()) {
+            validCreditMapper.removeValidCreditById(i);
         }
-        ValidCredit lastValidCredit = validCreditList.get(index);
-        for(int i = 0; i <= index; i++) {
-            validCreditMapper.removeValidCreditById(validCreditList.get(i).getVcId());
-        }
-        if(nowSum > credit) {
-            ValidCredit validCredit = new ValidCredit();
-            validCredit.setUserId(userId);
-            validCredit.setCredit(nowSum - credit);
-            validCredit.setCreateTime(lastValidCredit.getCreateTime());
-            validCredit.setExpiredTime(lastValidCredit.getExpiredTime());
-            validCreditMapper.saveValidCredit(validCredit);
+        if(creditBO.getCreditOfAdd() != null) {
+            validCreditMapper.saveValidCredit(creditBO.getCreditOfAdd());
         }
         CreditEntity creditEntity = new CreditEntity();
         creditEntity.setUserId(userId);
