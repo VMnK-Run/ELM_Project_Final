@@ -24,9 +24,9 @@ public interface WalletMapper {
     @Insert("insert into wallet(userId,createTime,balance) values(#{userId},#{createTime},#{balance})")
     public int saveWallet(String userId,String createTime,double balance);
 
-    @Update("update wallet set balance=balance+#{amount} where userId=#{outId}")
-    public void withdraw(String outId, Double amount);
-
     @Update("update wallet set balance=balance-#{amount} where userId=#{outId}")
-    public void fund(String inId, Double amount);
+    public void withdraw(@Param("outId") String outId, @Param("amount") Double amount);
+
+    @Update("update wallet set balance=balance+#{amount} where userId=#{inId}")
+    public void fund(@Param("inId") String inId, @Param("amount") Double amount);
 }

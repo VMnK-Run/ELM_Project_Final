@@ -16,6 +16,7 @@ import java.util.List;
 public class VirtualWalletServiceImpl implements WalletService {
     @Autowired
     private WalletMapper walletMapper;
+    @Autowired
     private WalletTransactionMapper transactionMapper;
     public VirtualWallet getWalletMessage(String userId){
         return walletMapper.getWalletMessage(userId);
@@ -47,6 +48,7 @@ public class VirtualWalletServiceImpl implements WalletService {
     }
 
     @Transactional
+    @Override
     public void withdraw(String outId, Double amount) {
         walletMapper.withdraw(outId, amount);
         TransactionEntity transactionEntity = new TransactionEntity();
@@ -66,6 +68,7 @@ public class VirtualWalletServiceImpl implements WalletService {
     }
 
     @Transactional
+    @Override
     public void fund(String inId, Double amount) {
         walletMapper.fund(inId, amount);
         TransactionEntity transactionEntity = new TransactionEntity();
@@ -80,6 +83,8 @@ public class VirtualWalletServiceImpl implements WalletService {
 
         transactionEntity.setInId(inId);
         transactionEntity.setOutId("");
+
+        transactionEntity.setAmount(amount);
 
         transactionMapper.saveTransaction(transactionEntity);
     }
